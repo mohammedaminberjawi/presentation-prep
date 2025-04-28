@@ -6,11 +6,25 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+    // Mock API call for login
+    try {
+      const response = await fetch("https://api.example.com/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        console.log("Login successful!");
+      } else {
+        console.error("Login failed");
+      }
+    } catch (error) {
+      console.error("Error occurred during login:", error);
+    }
   };
 
   return (
