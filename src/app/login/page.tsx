@@ -26,7 +26,7 @@ const LoginPage: React.FC = () => {
         onSubmit={handleSubmit}
         style={{ display: "flex", flexDirection: "column", width: "300px" }}
       >
-        <h2>Login</h2>
+        <h2>Welcome Back!</h2>
         <label>
           Email:
           <input
@@ -57,7 +57,7 @@ const LoginPage: React.FC = () => {
             cursor: "pointer",
           }}
         >
-          Login
+          Log In
         </button>
       </form>
     </div>
