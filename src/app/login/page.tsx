@@ -8,22 +8,45 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // Mock API call for login
+
     try {
+      // Show loading state to user
       const response = await fetch("https://api.example.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // Handle cookies properly
       });
+
+      const data = await response.json();
+
       if (response.ok) {
-        console.log("Login successful!");
+        // Handle successful login
+        console.log("Login successful!", data);
+        // Here you could:
+        // - Store auth token
+        // - Update global auth state
+        // - Redirect user to dashboard
       } else {
-        console.error("Login failed");
+        // Handle specific error cases
+        const errorMessage = data.message || "Login failed. Please try again.";
+        console.error("Login failed:", errorMessage);
+        // Here you could:
+        // - Show error message to user
+        // - Clear password field
+        // - Focus email field
       }
     } catch (error) {
-      console.error("Error occurred during login:", error);
+      // Handle network/unexpected errors
+      const errorMessage =
+        error instanceof Error ? error.message : "An unexpected error occurred";
+      console.error("Error during login:", errorMessage);
+      // Here you could:
+      // - Show network error message
+      // - Enable retry mechanism
     }
   };
 
